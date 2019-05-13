@@ -45,9 +45,7 @@ def run(filename):
                           'green': [0.2, 0.5, 0.5],
                           'blue': [0.2, 0.5, 0.5]}]
     reflect = '.white'
-    # areflect = reflect[0]
-    # dreflect = reflect[1]
-    # sreflect = reflect[2]
+
 
     #print symbols
     for command in commands:
@@ -56,6 +54,12 @@ def run(filename):
                        float(command['args'][0]), float(command['args'][1]), float(command['args'][2]),
                        float(command['args'][3]), step_3d)
             matrix_mult( systems[-1], polygons )
+
+            if command['constants'] == None:
+                reflect = '.white'
+            else:
+                reflect = command['constants']
+
             draw_polygons(polygons, screen, zbuffer, view, ambient, light, symbols, reflect)
             polygons = []
 
@@ -65,6 +69,12 @@ def run(filename):
                       float(command['args'][0]), float(command['args'][1]), float(command['args'][2]),
                       float(command['args'][3]), float(command['args'][4]), step_3d)
             matrix_mult( systems[-1], polygons )
+
+            if command['constants'] == None:
+                reflect = '.white'
+            else:
+                reflect = command['constants']
+
             draw_polygons(polygons, screen, zbuffer, view, ambient, light, symbols, reflect)
             polygons = []
 
@@ -74,6 +84,12 @@ def run(filename):
                     float(command['args'][0]), float(command['args'][1]), float(command['args'][2]),
                     float(command['args'][3]), float(command['args'][4]), float(command['args'][5]))
             matrix_mult( systems[-1], polygons )
+
+            if command['constants'] == None:
+                reflect = '.white'
+            else:
+                reflect = command['constants']
+
             draw_polygons(polygons, screen, zbuffer, view, ambient, light, symbols, reflect)
             polygons = []
 
@@ -142,5 +158,5 @@ def run(filename):
             if command['op'] == 'display':
                 display(screen)
             else:
-                save_extension(screen, command['args'][0])
+                save_extension(screen, command['args'][0]+".png")
         print command
